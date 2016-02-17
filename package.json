@@ -9,6 +9,7 @@
   "author": "Kristen Pandolph <corajade@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "base62": "^1.1.0",
     "express": "^4.13.4",
     "mongodb": "^2.1.5"
   }
