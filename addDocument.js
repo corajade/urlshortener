@@ -1,21 +1,27 @@
-module.exports= function addDoc(db, url, callback){
+module.exports= function addDoc(db, str){
     var nextShort=require(process.cwd()+"/nextShort.js");
     var assert=require("assert");
     var paths=db.collection("paths");
     var counter=db.collection("counter");
-    counter.insert({
+    counter.count( function(err, c){
+        if(err){throw err;}
+       else if(c===0){
+        counter.insert({
         _id:"userId",
         seq:0
     }, function(err, results) {
         assert.equal(null, err);
         assert.equal(1, results.insertedCount);
     });
-    
-    paths.insert({"URL": url}, function(err, results){
+        }
+    })
+
+   var short=nextShort("userId", counter); 
+    paths.insert({"URL": str, "shortURL":short}, function(err, results){
         if(err){throw err;}
         console.log("inserted a document");
-        console.log(results);
-        callback(results);
+       return results.ops[0];
+         
     });
     
 }
