@@ -1,4 +1,4 @@
-//module.exports=
+module.exports=
 function checkPathStr(x){
     var dns=require("dns");
     var url=require("url");
@@ -29,6 +29,6 @@ function checkPathStr(x){
     }
   }
   else{return x;}
-}
+};
 
 

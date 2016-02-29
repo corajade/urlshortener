@@ -1,4 +1,4 @@
-module.exports= function addDoc(db, str){
+module.exports= function addDoc(db, str, callback){
     var nextShort=require(process.cwd()+"/nextShort.js");
     var assert=require("assert");
     var paths=db.collection("paths");
@@ -17,11 +17,6 @@ module.exports= function addDoc(db, str){
     })
 
    var short=nextShort("userId", counter); 
-    paths.insert({"URL": str, "shortURL":short}, function(err, results){
-        if(err){throw err;}
-        console.log("inserted a document");
-       return results.ops[0];
-         
-    });
+    paths.insertOne({"URL": str, "shortURL":short}, callback);
     
 }

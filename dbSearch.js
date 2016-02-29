@@ -1,11 +1,7 @@
-module.exports=function dbSearch(coll, str){
-    coll.find({"URL":str}).limit(1).toArray(function(err, doc){
-        if(err){
-            throw err;
-        }
-        if(doc.length<1){
-            return null;
-        }
-        return doc;
-    })
+module.exports=function dbSearch(coll, str, callback){
+ 
+   
+          coll.find({"shortURL":str}).limit(1).toArray(callback);
+    
+  
 }
