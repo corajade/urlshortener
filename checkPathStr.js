@@ -1,10 +1,12 @@
 module.exports=
-function checkPathStr(x){
+function checkPathStr(x, callback){
     var dns=require("dns");
     var url=require("url");
     var validator=require("validator");
+     var b=x;
     x=x.toLowerCase();
   var test=x.startsWith("/new/");
+ 
   if(test){
       var newX=x.slice(5);
       //check that the address is correct
@@ -16,19 +18,22 @@ function checkPathStr(x){
           }
           var host=url.parse(newX).hostname;
           console.log(host);
-        dns.resolve(host, function(err, addr){
+        dns.lookup(host, function(err, addr, f){
             if(err){
                 console.log(err);
-                return false;
+               callback(err, null);
             }
-           return true;
+            b=true;
+            console.log(addr);
+          
         });
       }
     else {
-        return false;
+        b=false;
+     
     }
   }
-  else{return x;}
+   callback(null, b);
 };
 
 
