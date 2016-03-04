@@ -3,11 +3,9 @@ function checkPathStr(x, callback){
     var dns=require("dns");
     var url=require("url");
     var validator=require("validator");
-     var b=x;
+     var b;
     x=x.toLowerCase();
-  var test=x.startsWith("/new/");
  
-  if(test){
       var newX=x.slice(5);
       //check that the address is correct
       var check=validator.isURL(newX);
@@ -17,23 +15,20 @@ function checkPathStr(x, callback){
                  newX="https://" + newX;
           }
           var host=url.parse(newX).hostname;
-          console.log(host);
+         
         dns.lookup(host, function(err, addr, f){
             if(err){
                 console.log(err);
                callback(err, null);
             }
-            b=true;
-            console.log(addr);
-          
+            b=newX;
+            callback(null, b);
         });
       }
-    else {
-        b=false;
-     
-    }
+  else{
+      callback(null, false);
   }
-   callback(null, b);
+  
 };
 
 
