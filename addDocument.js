@@ -10,9 +10,9 @@ module.exports= function addDoc(db, str, callback){
            throw err;
        }
        var short=base62.encode(r.value.seq);
-        paths.insertOne({"URL": str, "shortURL":short},{_id:false}, callback);
+ 
+        paths.insertOne({"URL": str, "shortURL":base62.encode(r.value.seq)}, callback);
            
-     
    }); 
    
     

@@ -2,15 +2,15 @@
 
 
 module.exports=function nextShort(str, collection, callback){
- console.log("In short");
+ 
  var test=require("assert");
         collection.count( {}, function(err, c){
         if(err){callback(err);}
-    console.log(c);
+
     if(c>0){
        collection.findOneAndUpdate({_id:str}, {$inc: {seq:1}}, 
        {returnOriginal:false}, function(err, r){
-      console.log(r);
+     
       callback(err, r);
     });
        }

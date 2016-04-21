@@ -4,9 +4,20 @@
     <body>
         <h4>How to use this application:</h4>
         <ol>
-            <li> Add /new/www.yoururlofchoice.com to the end of this application's
+            <li> Add /new/www.yoururlofchoice.com to the end of this application's base URL
         </li>
+        <li> Add the shortURL given to the end of the base URL to go to your chosen URL .</li>
         </ol>
+        <p>
+            Examples: <br> Input=www.myherokuappURL.com/new/www.google.com
+            <br> Output={"URL":"https://www.google.com, "shortURL":"3"} <br>
+            Inputting: www.myherokuappURL.com/3 will redirect to www.google.com. 
+            <br> Input=www.myherokuappURL.com/new/cats.com
+            <br> output="Invalid URL"
+            <br> Input=www.myherokuappURL.com/xyz
+            <br> Output=Redirect to another URL if this is a valid short URL
+                 or an error message if not valid. 
+        </p>
     </body>
     
 </html>
