@@ -9,7 +9,7 @@ var app=express();
 
 MongoClient.connect(url, function(err, db){
     if(err){throw err;}
- var pathColl=db.collection("paths");
+  var pathColl=db.collection("paths");
     app.get(/new\/.*/, function(req, res, next){
         var p= req.path;
         
@@ -23,17 +23,25 @@ MongoClient.connect(url, function(err, db){
            }
            else{
               
-          dbSearch(pathColl, "URL", re, function(err, doc){
-           
-          })
-         addDoc(db, re, function(err, results){
+         pathColl.find({"URL":re}).toArray(function(err, doc){
+            if(err){throw err;}
+            console.log("RE=" + re);
+             if(doc.length>0){
+             
+              res.send("Already exists");
+             }
+             else{
+              addDoc(db, re, function(err, results){
              
              if(err){throw err;}
            
             var shortened="https://urlshortener-corajade.c9users.io/" + results.ops[0].shortURL;
             var jsonR={"URL":results.ops[0].URL, "shortURL":shortened}
              res.json(jsonR);
-           });}
+           });
+             }
+          });
+         }
     });
     });
     app.get("/", function(req, res){
@@ -44,17 +52,20 @@ MongoClient.connect(url, function(err, db){
    app.get(/\/.+/, function(req, res){
        var p=req.path;
        p=p.slice(1);
-         dbSearch(db.collection("paths"), "shortURL", p, function(err, docs){
+      
+       pathColl.find({"shortURL": p}).toArray( 
+          function(err, docs){
           if(err){
           throw err;}
+          console.log(docs[0]);
           if(docs.length>0){
-          var redir=docs;
-          //res.redirect("http://google.com");
+          var redir=docs[0]["URL"];
+      
           console.log(redir);
           res.redirect(redir);
            
           }
-          else{
+          else if(docs.length==0){
            res.send("Invalid short URL. Unable to redirect");
           }
       }); 
