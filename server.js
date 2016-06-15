@@ -3,9 +3,9 @@ var MongoClient= require("mongodb").MongoClient;
 var addDoc=require(process.cwd()+ "/addDocument.js");
 var url = 'mongodb://localhost:27017/shortUrl';
 var checkPathStr=require(process.cwd()+ "/checkPathStr.js");
-var dbSearch=require(process.cwd()+ "/dbSearch.js");
 var app=express();
 
+//need to clear the database
 
 MongoClient.connect(url, function(err, db){
     if(err){throw err;}
@@ -25,10 +25,11 @@ MongoClient.connect(url, function(err, db){
               
          pathColl.find({"URL":re}).toArray(function(err, doc){
             if(err){throw err;}
-            console.log("RE=" + re);
+            
              if(doc.length>0){
-             
-              res.send("Already exists");
+             var jsonRes={"URL":doc[0]["URL"], "shortURL":"https://urlshortener-corajade.c9users.io/"
+             +doc[0]["shortURL"]}
+              res.json(jsonRes);
              }
              else{
               addDoc(db, re, function(err, results){
@@ -57,11 +58,11 @@ MongoClient.connect(url, function(err, db){
           function(err, docs){
           if(err){
           throw err;}
-          console.log(docs[0]);
+          
           if(docs.length>0){
           var redir=docs[0]["URL"];
       
-          console.log(redir);
+      
           res.redirect(redir);
            
           }
