@@ -4,11 +4,13 @@ var addDoc=require(process.cwd()+ "/addDocument.js");
 var url = 'mongodb://localhost:27017/shortUrl';
 var checkPathStr=require(process.cwd()+ "/checkPathStr.js");
 var app=express();
+process.env.PWD=process.cwd();
 
 //need to clear the database
 
 MongoClient.connect(url, function(err, db){
     if(err){throw err;}
+   
   var pathColl=db.collection("paths");
     app.get(/new\/.*/, function(req, res, next){
         var p= req.path;
@@ -45,8 +47,10 @@ MongoClient.connect(url, function(err, db){
          }
     });
     });
+     app.use(express.static(process.env.PWD + "/public"));
     app.get("/", function(req, res){
-         res.sendFile(process.cwd()+ "/index.html");       
+         res.sendFile(process.env.PWD+ "/public/index.html");
+         res.end();
      
   });
    
