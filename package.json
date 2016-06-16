@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/corajade/urlshortener#readme",
   "engines": {
-    "node": "^4.4.5",
-    "npm": "^3.9.5"
+    "node": "4.4.5",
+    "npm": "3.9.5"
   },
   "dependencies": {
     "base62": "^1.1.0",
