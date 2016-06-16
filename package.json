@@ -1,8 +1,8 @@
 {
-  "name": "shorturl",
+  "name": "shortUrl",
   "version": "1.0.0",
   "description": "returns shortcuts to URLS",
-  "main": "server.js",
+  "main": "public/index.html",
   "scripts": {
      "start":"node server.js",
      "test": "echo \"Error: no test specified\" && exit 1"
@@ -28,3 +28,7 @@
     "validator": "^4.9.0"
   }
 }
+
+ 
+  
+  
