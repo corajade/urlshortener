@@ -1,11 +1,13 @@
 var express=require("express");
 var MongoClient= require("mongodb").MongoClient;
+require("dotenv").load();
 var addDoc=require(process.cwd()+ "/addDocument.js");
-var url = 'mongodb://localhost:27017/shortUrl';
+var url =  process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL || 'mongodb://localhost:27017/shortUrl';
 var checkPathStr=require(process.cwd()+ "/checkPathStr.js");
 var app=express();
 process.env.PWD=process.cwd();
-
+app.use(express.static(process.env.PWD + "/public"));
 //need to clear the database
 
 MongoClient.connect(url, function(err, db){
@@ -47,7 +49,7 @@ MongoClient.connect(url, function(err, db){
          }
     });
     });
-     app.use(express.static(process.env.PWD + "/public"));
+     
     app.get("/", function(req, res){
          res.sendFile(process.env.PWD+ "/public/index.html");
          res.end();
