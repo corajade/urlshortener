@@ -4,17 +4,21 @@
     <body>
         <h4>How to use this application:</h4>
         <ol>
-            <li> Add /new/www.yoururlofchoice.com to the end of this application's base URL
+            <li> Add /new/<b>&#60yourUrlOfChoice&#62</b> to the end of this application's base URL
+            <ul><li>If the url is a valid website, you will receive a short URL that will redirect to your chosen website </li>
+            <li>If the url is not a valid website, you will receive an error message indicating "invalid URL"</li></ul>
         </li>
-        <li> Add the shortURL given to the end of the base URL to go to your chosen URL .</li>
+        <li> To be redirected to your chosen website input the URL address given under the "shortUrl" into your browser's address bar.
+        <ul><li>All shortened URLs take the form https://powerful-chamber-28043.herokuapp.com/&#60a number and/or letter combination&#62</li>
+        <li>If you enter a number/letter combination that is not a shortened URL, you will receive an error message indicating invalid input</li></ul></li>
         </ol>
         <p>
-            Examples: <br> Input=www.myherokuappURL.com/new/www.google.com
+            Examples: <br> Input=https://powerful-chamber-28043.herokuapp.com/new/www.google.com
             <br> Output={"URL":"https://www.google.com, "shortURL":"3"} <br>
-            Inputting: www.myherokuappURL.com/3 will redirect to www.google.com. 
-            <br> Input=www.myherokuappURL.com/new/cats.com
+            Inputting: https://powerful-chamber-28043.herokuapp.com/3 will redirect to www.google.com. 
+            <br> Input=https://powerful-chamber-28043.herokuapp.com/new/Ilovecats
             <br> output="Invalid URL"
-            <br> Input=www.myherokuappURL.com/xyz
+            <br> Input=https://powerful-chamber-28043.herokuapp.com/xyz
             <br> Output=Redirect to another URL if this is a valid short URL
                  or an error message if not valid. 
         </p>

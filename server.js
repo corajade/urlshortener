@@ -8,7 +8,7 @@ var checkPathStr=require(process.cwd()+ "/checkPathStr.js");
 var app=express();
 process.env.PWD=process.cwd();
 app.use(express.static(process.env.PWD + "/public"));
-//need to clear the database
+
 
 MongoClient.connect(url, function(err, db){
     if(err){throw err;}
@@ -31,7 +31,7 @@ MongoClient.connect(url, function(err, db){
             if(err){throw err;}
             
              if(doc.length>0){
-             var jsonRes={"URL":doc[0]["URL"], "shortURL":"https://urlshortener-corajade.c9users.io/"
+             var jsonRes={"URL":doc[0]["URL"], "shortURL":"https://powerful-chamber-28043.herokuapp.com/"
              +doc[0]["shortURL"]}
               res.json(jsonRes);
              }
@@ -40,7 +40,7 @@ MongoClient.connect(url, function(err, db){
              
              if(err){throw err;}
            
-            var shortened="https://urlshortener-corajade.c9users.io/" + results.ops[0].shortURL;
+            var shortened="https://powerful-chamber-28043.herokuapp.com/" + results.ops[0].shortURL;
             var jsonR={"URL":results.ops[0].URL, "shortURL":shortened}
              res.json(jsonR);
            });
